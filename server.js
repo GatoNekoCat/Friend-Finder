@@ -15,8 +15,11 @@ app.get("/", function(req, res) {
     res.sendFile(path.join(__dirname, "index.html"));
 });
 
-// Serve static content for the app from the "public" directory in the application directory.
-app.use(express.static("public"));
+//link to survey
+app.get("/survey", function(req, res) {
+    res.sendFile(path.join(__dirname, "survey.html"));
+});
+
 
 // Set Handlebars.
 var exphbs = require("express-handlebars");
@@ -25,9 +28,9 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 // Import routes and give the server access to them.
-var routes = require("./controllers/catsController.js");
+var routes = require("./routes/htmlRoutes");
 
-app.use(routes);
+
 
 // Start our server so that it can begin listening to client requests.
 app.listen(PORT, function() {
